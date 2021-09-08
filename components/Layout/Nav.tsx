@@ -11,8 +11,6 @@ const Page: FunctionComponent<Props> = () => {
   // eslint-disable-next-line no-unused-vars
   const [_, signOut] = useSignOut()
 
-  console.log(user)
-
   return (
     <nav className="flex">
       {session && user ? (
