@@ -18,12 +18,12 @@ body {
 }
 
 body.dark {
-  --color-bg: black;
-  --color-bgDim: #100624;
+  --color-bg: #151515;
+  --color-bgDim: #2b2b2b;
   --color-fg: #d1d1d1;
-  --color-accent: cyan;
+  --color-accent: rgb(255, 243, 149);
   --color-accent2: lightpink;
-  --color-border: #343456;
+  --color-border: #464646;
 }
 
 h1,
@@ -33,4 +33,9 @@ h4,
 h5,
 h6 {
   font-family: var(--font-serif);
+}
+
+.h-fill {
+  position: relative;
+  min-height: calc(100vh - var(--header-height) - var(--footer-height));
 }

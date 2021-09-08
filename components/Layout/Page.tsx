@@ -7,14 +7,10 @@ type Props = {}
 const Page: FunctionComponent<Props> = ({ children }) => (
   <>
     <Header />
-    <main className="max-w-[1300px] p-4 mx-auto">{children}</main>
+    <main className="max-w-[1300px] p-4 mx-auto h-fill flex items-center justify-center flex-col">
+      {children}
+    </main>
     <Footer />
-    <style jsx>{`
-      main {
-        position: relative;
-        min-height: calc(100vh - var(--header-height) - var(--footer-height));
-      }
-    `}</style>
   </>
 )
 
