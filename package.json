@@ -8,7 +8,8 @@
     "start": "next start",
     "build": "next build",
     "lint": "eslint . --ext ts,tsx",
-    "lint:fix": "eslint . --ext ts,tsx --fix"
+    "lint:fix": "eslint . --ext ts,tsx --fix",
+    "generate-types": "openapi-typescript \"$(dotenv -- bash -c 'echo $NEXT_PUBLIC_SUPABASE_URL')/rest/v1/?apikey=$(dotenv -- bash -c 'echo $NEXT_PUBLIC_SUPABASE_ANON_KEY')\" --output db/supabase/generated-types.ts"
   },
   "keywords": [],
   "author": "",
@@ -67,11 +68,13 @@
     "@types/react": "^17.0.11",
     "@typescript-eslint/eslint-plugin": "^4.27.0",
     "@typescript-eslint/parser": "^4.27.0",
+    "dotenv-cli": "^4.0.0",
     "eslint": "^7.28.0",
     "eslint-config-next": "^11.0.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-react": "^7.24.0",
     "husky": "*",
+    "openapi-typescript": "^4.0.2",
     "prettier": "*",
     "pretty-quick": "*",
     "typescript": "^4.3.4"

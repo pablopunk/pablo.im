@@ -11,12 +11,17 @@ const Page: FunctionComponent<Props> = () => {
   // eslint-disable-next-line no-unused-vars
   const [_, signOut] = useSignOut()
 
+  const handleSignOut = async () => {
+    await signOut()
+    window.location.href = '/'
+  }
+
   return (
     <nav className="flex">
       {session && user ? (
         <>
           <Button href="/profile">My account</Button>
-          <Button href={signOut}>Log out</Button>
+          <Button href={handleSignOut}>Log out</Button>
         </>
       ) : (
         <Button href="/login">Log in</Button>

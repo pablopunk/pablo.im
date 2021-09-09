@@ -1,10 +1,10 @@
 body {
   --color-bg: white;
-  --color-bgDim: rgba(0, 0, 0, 0.07);
+  --color-bgDim: rgb(250, 251, 252);
   --color-fg: #454545;
   --color-accent: #0284c7;
   --color-accent2: #14b8a6;
-  --color-border: lightgray;
+  --color-border: rgb(232, 232, 232);
 
   --header-height: 60px;
   --footer-height: 60px;
