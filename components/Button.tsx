@@ -7,7 +7,8 @@ type Props = {
   className?: string
   disabled?: boolean
   icon?: ReactNode
-  type?: 'action' | 'default'
+  type?: 'action' | 'default' | 'danger'
+  rounded?: boolean
 }
 
 const Button: FunctionComponent<Props> = ({
@@ -17,6 +18,7 @@ const Button: FunctionComponent<Props> = ({
   disabled,
   icon,
   type = 'default',
+  rounded = false,
 }) => {
   const commonStyles =
     'm-1 px-2 py-1 border rounded-md shadow-md flex items-center justify-center transition-all focus:outline-none'
@@ -26,25 +28,32 @@ const Button: FunctionComponent<Props> = ({
   const defaultStyles = 'bg-bg hover:text-accent'
   const actionStyles =
     'bg-accent text-bg border-accent hover:text-accent hover:bg-bg'
+  const dangerStyles = 'text-danger hover:border-danger bg-bg'
+  const iconStyles = classNames({
+    'mr-1': icon && children,
+    'my-1': icon && children == null,
+  })
   const styles = classNames(className, commonStyles, {
     [commonHoverStyles]: !disabled,
     [disabledStyles]: disabled,
     [defaultStyles]: !disabled && type === 'default',
     [actionStyles]: !disabled && type === 'action',
+    [dangerStyles]: !disabled && type === 'danger',
+    'rounded-full': rounded,
   })
 
   if (typeof href === 'function') {
     if (disabled) {
       return (
         <button className={styles} disabled>
-          {icon && <span className="mr-1">{icon}</span>}
+          {icon && <span className={iconStyles}>{icon}</span>}
           {children}
         </button>
       )
     }
     return (
       <button onClick={href} className={styles}>
-        {icon && <span className="mr-1">{icon}</span>}
+        {icon && <span className={iconStyles}>{icon}</span>}
         {children}
       </button>
     )
@@ -52,7 +61,10 @@ const Button: FunctionComponent<Props> = ({
 
   return (
     <Link href={href}>
-      <a className={styles}>{children}</a>
+      <a className={styles}>
+        {icon && <span className={iconStyles}>{icon}</span>}
+        {children}
+      </a>
     </Link>
   )
 }

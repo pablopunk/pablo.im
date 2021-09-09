@@ -13,6 +13,7 @@ module.exports = {
         accent: 'var(--color-accent)',
         accent2: 'var(--color-accent2)',
         border: 'var(--color-border)',
+        danger: 'var(--color-danger)',
         transparent: 'transparent',
         ...colors,
       },

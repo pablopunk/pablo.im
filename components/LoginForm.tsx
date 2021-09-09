@@ -30,7 +30,7 @@ export default function LoginForm({
       </Button>
       <div className="mt-3">
         {error ? (
-          <div className="text-red-500">{error?.message}</div>
+          <div className="text-danger">{error?.message}</div>
         ) : successful ? (
           <div className="text-accent">Check your inbox!</div>
         ) : (
