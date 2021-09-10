@@ -99,6 +99,7 @@ export default function UrlRedirects({ user }: { user: User }) {
               type="url"
               value={to}
               onChange={(e) => setTo(e.target.value)}
+              onKeyUp={(e) => e.key === 'Enter' && handleSubmitNewUrlRedirect()}
               placeholder="https://long-url.com/whatever"
               className="w-full bg-transparent focus:outline-none "
             />

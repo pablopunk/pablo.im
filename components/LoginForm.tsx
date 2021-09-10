@@ -19,18 +19,21 @@ export default function LoginForm({
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+        onKeyUp={(e) => e.keyCode === 13 && onFormSubmit(email)}
         placeholder="Email"
       />
-      <Button
-        className="w-full mt-2"
-        href={() => onFormSubmit({ email })}
-        disabled={fetching || successful}
-      >
-        {fetching ? 'Loading...' : 'Log in'}
-      </Button>
+      <div>
+        <Button
+          className="w-full mt-2"
+          href={() => onFormSubmit(email)}
+          disabled={fetching || successful}
+        >
+          {fetching ? 'Loading...' : 'Log in'}
+        </Button>
+      </div>
       <div className="mt-3">
         {error ? (
-          <div className="text-danger">{error?.message}</div>
+          <div className="text-danger">{error}</div>
         ) : successful ? (
           <div className="text-accent">Check your inbox!</div>
         ) : (

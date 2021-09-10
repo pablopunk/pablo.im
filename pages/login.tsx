@@ -3,9 +3,16 @@ import { useSignIn } from 'db'
 import { useEffect, useState } from 'react'
 
 export default function Login() {
-  const [{ error, fetching }, signIn] = useSignIn()
+  const [{ error: signInError, fetching }, signIn] = useSignIn()
   const [clicked, setClicked] = useState(false)
   const [successful, setSuccessful] = useState(false)
+  const [error, setError] = useState(null)
+
+  useEffect(() => {
+    if (signInError) {
+      setError(signInError.message)
+    }
+  }, [signInError])
 
   useEffect(() => {
     if (!fetching && clicked && !error) {
@@ -13,7 +20,11 @@ export default function Login() {
     }
   }, [fetching])
 
-  const clickedLogin = ({ email }) => {
+  const clickedLogin = (email) => {
+    if (!email) {
+      setError('Type your email')
+      return
+    }
     setClicked(true)
     signIn({ email })
   }
