@@ -19,11 +19,9 @@ export interface paths {
           id?: parameters['rowFilter.url_redirects.id']
           created_at?: parameters['rowFilter.url_redirects.created_at']
           updated_at?: parameters['rowFilter.url_redirects.updated_at']
-          user_id?: parameters['rowFilter.url_redirects.user_id']
-          /** Redirect from this URL */
           from?: parameters['rowFilter.url_redirects.from']
-          /** Redirect to this URL */
           to?: parameters['rowFilter.url_redirects.to']
+          user_id?: parameters['rowFilter.url_redirects.user_id']
           /** Filtering Columns */
           select?: parameters['select']
           /** Ordering */
@@ -77,11 +75,9 @@ export interface paths {
           id?: parameters['rowFilter.url_redirects.id']
           created_at?: parameters['rowFilter.url_redirects.created_at']
           updated_at?: parameters['rowFilter.url_redirects.updated_at']
-          user_id?: parameters['rowFilter.url_redirects.user_id']
-          /** Redirect from this URL */
           from?: parameters['rowFilter.url_redirects.from']
-          /** Redirect to this URL */
           to?: parameters['rowFilter.url_redirects.to']
+          user_id?: parameters['rowFilter.url_redirects.user_id']
         }
         header: {
           /** Preference */
@@ -99,11 +95,9 @@ export interface paths {
           id?: parameters['rowFilter.url_redirects.id']
           created_at?: parameters['rowFilter.url_redirects.created_at']
           updated_at?: parameters['rowFilter.url_redirects.updated_at']
-          user_id?: parameters['rowFilter.url_redirects.user_id']
-          /** Redirect from this URL */
           from?: parameters['rowFilter.url_redirects.from']
-          /** Redirect to this URL */
           to?: parameters['rowFilter.url_redirects.to']
+          user_id?: parameters['rowFilter.url_redirects.user_id']
         }
         body: {
           /** url_redirects */
@@ -131,11 +125,9 @@ export interface definitions {
     id: number
     created_at?: string
     updated_at?: string
-    user_id: number
-    /** Redirect from this URL */
     from: string
-    /** Redirect to this URL */
     to: string
+    user_id: string
   }
 }
 
@@ -165,11 +157,9 @@ export interface parameters {
   'rowFilter.url_redirects.id': string
   'rowFilter.url_redirects.created_at': string
   'rowFilter.url_redirects.updated_at': string
-  'rowFilter.url_redirects.user_id': string
-  /** Redirect from this URL */
   'rowFilter.url_redirects.from': string
-  /** Redirect to this URL */
   'rowFilter.url_redirects.to': string
+  'rowFilter.url_redirects.user_id': string
 }
 
 export interface operations {}

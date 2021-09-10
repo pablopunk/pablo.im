@@ -1,10 +1,10 @@
 import { PostgrestError } from '@supabase/postgrest-js'
 import { UrlRedirect, User } from 'db/types'
-import { useFilter, useSelect } from 'react-supabase'
+import { useDelete, useFilter, useInsert, useSelect } from 'react-supabase'
 
 const TABLE_NAME = 'url_redirects'
 
-const useUserUrlRedirects = (
+export const useUserUrlRedirects = (
   user: User
 ): {
   count?: number
@@ -21,19 +21,38 @@ const useUserUrlRedirects = (
 
   return {
     count,
-    data: data || [
-      { id: 123, from: 'test', to: 'https://pablopunk.com', user_id: 123 },
-      {
-        id: 123,
-        from: 'testlonggggggggggg',
-        to: 'https://pablopunk.com/longgggggggggggggggggggggggggggggggggggg',
-        user_id: 123,
-      },
-    ],
+    data: data || [],
     error,
     fetching,
     reexecute,
   }
 }
 
-export default useUserUrlRedirects
+export const useInsertUrlRedirect = () => {
+  const [{ error, fetching }, insert] = useInsert<UrlRedirect>(TABLE_NAME)
+
+  return {
+    insert,
+    error:
+      error == null
+        ? null
+        : error?.message.includes('duplicate key')
+        ? {
+            message: 'This URL is already in use',
+          }
+        : error,
+    fetching,
+  }
+}
+
+export const useDeleteUrlRedirect = () => {
+  const [{ error, fetching }, deleteFn] = useDelete<UrlRedirect>(TABLE_NAME)
+
+  return {
+    deleteFn(id: UrlRedirect['id']) {
+      return deleteFn((query) => query.eq('id', id))
+    },
+    error,
+    fetching,
+  }
+}

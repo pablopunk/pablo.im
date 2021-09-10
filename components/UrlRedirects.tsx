@@ -1,15 +1,69 @@
-import { useUserUrlRedirects } from 'db'
-import { User } from 'db/types'
-import React, { useState } from 'react'
+import {
+  useDeleteUrlRedirect,
+  useInsertUrlRedirect,
+  useUserUrlRedirects,
+} from 'db'
+import { UrlRedirect, User } from 'db/types'
+import React, { useEffect, useState } from 'react'
 import Button from './Button'
 import { BiBookAdd, BiPencil, BiTrash } from 'react-icons/bi'
 import { BsArrowBarRight } from 'react-icons/bs'
+import isUrl from 'is-url'
+import { isValidName } from 'lib/isValidName'
 
 export default function UrlRedirects({ user }: { user: User }) {
-  const { data: redirects } = useUserUrlRedirects(user)
+  const {
+    data: redirects,
+    fetching: loadingData,
+    reexecute,
+    error: fetchError,
+  } = useUserUrlRedirects(user)
   const [addingOne, setAddingOne] = useState(false)
   const [from, setFrom] = useState('')
   const [to, setTo] = useState('')
+  const {
+    insert,
+    fetching: loadingInsert,
+    error: insertError,
+  } = useInsertUrlRedirect()
+  const { deleteFn, fetching: loadingDelete } = useDeleteUrlRedirect()
+  const [error, setError] = useState('')
+
+  useEffect(() => {
+    if (fetchError) {
+      setError(fetchError.message)
+    } else if (insertError) {
+      setError(insertError.message)
+    } else {
+      setError('')
+    }
+  }, [fetchError, insertError])
+
+  const handleSubmitNewUrlRedirect = () => {
+    if (!from || !to) {
+      setError('From and To must be filled')
+      return
+    }
+    if (!isUrl(to)) {
+      setError(`"${to}" is not a valid URL`)
+      return
+    }
+    if (!isValidName(from)) {
+      setError(`"${from}" is not a valid name`)
+      return
+    }
+    insert({ from, to, user_id: user.id })
+      .then(reexecute)
+      .then(() => error == null && setAddingOne(false))
+      .then(() => setTo(''))
+      .catch((error) => setError(error.message))
+  }
+
+  const handleDeleteUrlRedirect = (urlRedirect: UrlRedirect) => {
+    deleteFn(urlRedirect.id)
+      .then(reexecute)
+      .catch((error) => setError(error.message))
+  }
 
   return (
     <div className="max-w-[600px]">
@@ -39,9 +93,10 @@ export default function UrlRedirects({ user }: { user: User }) {
             />
           </div>
           <Button
-            href={() => setAddingOne(false)}
+            href={handleSubmitNewUrlRedirect}
             type="action"
             className="mt-4 font-sans"
+            disabled={loadingInsert}
           >
             Submit
           </Button>
@@ -57,6 +112,7 @@ export default function UrlRedirects({ user }: { user: User }) {
           Add one
         </Button>
       )}
+      <div className="my-3 text-danger">{error}</div>
       {redirects.map((redirect) => (
         <div
           key={redirect.id}
@@ -83,7 +139,12 @@ export default function UrlRedirects({ user }: { user: User }) {
           </div>
           <div className="flex">
             <Button href="" icon={<BiPencil />} rounded />
-            <Button href="" icon={<BiTrash />} type="danger" rounded />
+            <Button
+              href={() => handleDeleteUrlRedirect(redirect)}
+              icon={<BiTrash />}
+              type="danger"
+              rounded
+            />
           </div>
         </div>
       ))}
