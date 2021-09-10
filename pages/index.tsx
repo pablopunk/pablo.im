@@ -1,3 +1,4 @@
+import Button from 'components/Button'
 import UrlRedirects from 'components/UrlRedirects'
 import { useAuth } from 'db'
 import { FunctionComponent } from 'react'
@@ -9,9 +10,13 @@ const Index: FunctionComponent<Props> = () => {
 
   return (
     <>
-      <h1 className="text-2xl">Manage your URL redirects</h1>
-
-      {user && <UrlRedirects user={user} />}
+      {user ? (
+        <UrlRedirects user={user} />
+      ) : (
+        <Button href="/login" type="action" className="text-xl">
+          Login
+        </Button>
+      )}
     </>
   )
 }

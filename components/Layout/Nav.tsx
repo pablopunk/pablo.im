@@ -20,7 +20,6 @@ const Page: FunctionComponent<Props> = () => {
     <nav className="flex">
       {session && user ? (
         <>
-          <Button href="/profile">My account</Button>
           <Button href={handleSignOut}>Log out</Button>
         </>
       ) : (

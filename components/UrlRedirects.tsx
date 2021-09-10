@@ -1,15 +1,18 @@
+import { SITE_URL } from 'config'
 import {
   useDeleteUrlRedirect,
   useInsertUrlRedirect,
   useUserUrlRedirects,
 } from 'db'
 import { UrlRedirect, User } from 'db/types'
-import React, { useEffect, useState } from 'react'
-import Button from './Button'
-import { BiBookAdd, BiPencil, BiTrash } from 'react-icons/bi'
-import { BsArrowBarRight } from 'react-icons/bs'
 import isUrl from 'is-url'
 import { isValidName } from 'lib/isValidName'
+import React, { useEffect, useState } from 'react'
+import { AiOutlineLoading } from 'react-icons/ai'
+import { BiBookAdd, BiTrash } from 'react-icons/bi'
+import { BsArrowBarRight } from 'react-icons/bs'
+import { RiCloseLine } from 'react-icons/ri'
+import Button from './Button'
 
 export default function UrlRedirects({ user }: { user: User }) {
   const {
@@ -66,10 +69,18 @@ export default function UrlRedirects({ user }: { user: User }) {
   }
 
   return (
-    <div className="max-w-[600px]">
+    <div className="max-w-[600px] flex flex-col items-center">
+      <h1 className="text-2xl">Manage your URL redirects</h1>
       {addingOne ? (
-        <div className="p-4 mt-3 font-mono border rounded shadow-lg">
-          <div className="flex items-start p-2 mb-2 border rounded">
+        <div className="relative flex flex-col items-center p-4 mt-3 font-mono border rounded shadow-lg">
+          <Button
+            className="absolute -top-5 -right-5"
+            href={() => setAddingOne(false)}
+            icon={<RiCloseLine />}
+            type="danger"
+            rounded
+          />
+          <div className="flex items-start w-full p-2 mb-2 border rounded">
             <label className="mr-1 font-bold">From</label>
             <div className="font-mono">
               <span className="text-accent mr-[1px]">pablo.im/</span>
@@ -82,7 +93,7 @@ export default function UrlRedirects({ user }: { user: User }) {
               />
             </div>
           </div>
-          <div className="flex items-center p-2 border rounded">
+          <div className="flex items-center w-full p-2 border rounded">
             <label className="mr-2 font-bold">To</label>
             <input
               type="url"
@@ -95,7 +106,7 @@ export default function UrlRedirects({ user }: { user: User }) {
           <Button
             href={handleSubmitNewUrlRedirect}
             type="action"
-            className="mt-4 font-sans"
+            className="mt-4 font-sans text-center"
             disabled={loadingInsert}
           >
             Submit
@@ -106,22 +117,25 @@ export default function UrlRedirects({ user }: { user: User }) {
           href={() => setAddingOne(true)}
           icon={<BiBookAdd />}
           type="action"
-          className="mt-4"
+          className="mx-auto mt-4"
           rounded
         >
           Add one
         </Button>
       )}
       <div className="my-3 text-danger">{error}</div>
+      {(loadingData || loadingDelete || loadingInsert) && (
+        <AiOutlineLoading className="w-full text-4xl text-center animate-spin" />
+      )}
       {redirects.map((redirect) => (
         <div
           key={redirect.id}
-          className="flex items-center justify-between w-full py-1 pl-3 pr-2 my-2 border rounded-full shadow"
+          className="flex items-center justify-between w-full py-1 pl-5 pr-2 my-2 border rounded-full shadow"
         >
           <div className="flex items-center">
             <div className="relative w-40 truncate">
               <a
-                href={'https://pablo.im/' + redirect.from}
+                href={SITE_URL + '/' + redirect.from}
                 className="mr-1 transition-all hover:underline text-accent"
               >
                 /{redirect.from}
@@ -132,13 +146,13 @@ export default function UrlRedirects({ user }: { user: User }) {
             </span>
             <a
               href={redirect.to}
-              className="max-w-[300px] mx-2 truncate transition-all hover:underline"
+              className="max-w-[300px] mx-2 truncate transition-all hover:underline italic opacity-80"
             >
               {redirect.to}
             </a>
           </div>
           <div className="flex">
-            <Button href="" icon={<BiPencil />} rounded />
+            {/*<Button href="" icon={<BiPencil />} rounded />*/}
             <Button
               href={() => handleDeleteUrlRedirect(redirect)}
               icon={<BiTrash />}

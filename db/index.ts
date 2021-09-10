@@ -7,3 +7,4 @@ export {
   useDeleteUrlRedirect,
 } from './supabase/hooks/useUserUrlRedirects'
 export { useSignIn, useSignUp, useSignOut } from 'react-supabase'
+export { getUrlRedirect } from './supabase/getUrlRedirect'

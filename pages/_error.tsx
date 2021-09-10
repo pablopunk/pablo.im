@@ -1,6 +1,6 @@
 function Error({ statusCode }) {
   return (
-    <div className="flex items-center justify-center h-full text-6xl mt-[20vh] text-red-400">
+    <div className="flex items-center justify-center h-full text-6xl text-red-400">
       <p>{statusCode ? `Error ${statusCode}` : 'Error on client'}</p>
     </div>
   )
