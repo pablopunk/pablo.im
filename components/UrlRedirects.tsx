@@ -69,7 +69,7 @@ export default function UrlRedirects({ user }: { user: User }) {
   }
 
   return (
-    <div className="max-w-[600px] flex flex-col items-center">
+    <div className="flex flex-col items-center w-full md:max-w-[600px]">
       <h1 className="text-2xl">Manage your URL redirects</h1>
       {addingOne ? (
         <div className="relative flex flex-col items-center p-4 mt-3 font-mono border rounded shadow-lg">
@@ -82,7 +82,7 @@ export default function UrlRedirects({ user }: { user: User }) {
           />
           <div className="flex items-start w-full p-2 mb-2 border rounded">
             <label className="mr-1 font-bold">From</label>
-            <div className="font-mono">
+            <div className="flex font-mono">
               <span className="text-accent mr-[1px]">pablo.im/</span>
               <input
                 type="text"
@@ -133,8 +133,8 @@ export default function UrlRedirects({ user }: { user: User }) {
           key={redirect.id}
           className="flex items-center justify-between w-full py-1 pl-5 pr-2 my-2 border rounded-full shadow"
         >
-          <div className="flex items-center">
-            <div className="relative w-40 truncate">
+          <div className="flex items-center overflow-hidden">
+            <div className="relative max-w-xs truncate">
               <a
                 href={SITE_URL + '/' + redirect.from}
                 className="mr-1 transition-all hover:underline text-accent"
@@ -147,7 +147,7 @@ export default function UrlRedirects({ user }: { user: User }) {
             </span>
             <a
               href={redirect.to}
-              className="max-w-[300px] mx-2 truncate transition-all hover:underline italic opacity-80"
+              className="max-w-xs mx-2 italic truncate transition-all hover:underline opacity-80"
             >
               {redirect.to}
             </a>
