@@ -126,7 +126,7 @@ export default function UrlRedirects({ user }: { user: User }) {
         </Button>
       )}
       {(redirects.length > 0 || search) && (
-        <div className="flex items-center px-2 py-1 mt-5 border rounded-full">
+        <div className="flex items-center px-2 py-1 my-4 border rounded-full">
           <BiSearchAlt className="mr-2 text-accent" size="1.5rem" />
           <input
             type="text"
@@ -137,7 +137,7 @@ export default function UrlRedirects({ user }: { user: User }) {
           />
         </div>
       )}
-      <div className="my-3 text-danger">{error}</div>
+      {error && <div className="my-3 text-danger">{error}</div>}
       {(loadingData || loadingDelete || loadingInsert) && (
         <AiOutlineLoading className="w-full text-4xl text-center animate-spin" />
       )}
