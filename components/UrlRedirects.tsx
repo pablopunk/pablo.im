@@ -72,7 +72,7 @@ export default function UrlRedirects({ user }: { user: User }) {
     <div className="flex flex-col items-center w-full md:max-w-[600px]">
       <h1 className="text-2xl">Manage your URL redirects</h1>
       {addingOne ? (
-        <div className="relative flex flex-col items-center p-4 mt-3 font-mono border rounded shadow-lg">
+        <div className="relative flex flex-col items-center max-w-full p-4 mt-3 font-mono border rounded shadow-lg">
           <Button
             className="absolute -top-5 -right-5"
             href={() => setAddingOne(false)}
