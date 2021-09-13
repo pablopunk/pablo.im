@@ -9,18 +9,19 @@ import isUrl from 'is-url'
 import { isValidName } from 'lib/isValidName'
 import React, { useEffect, useState } from 'react'
 import { AiOutlineLoading } from 'react-icons/ai'
-import { BiBookAdd, BiTrash } from 'react-icons/bi'
+import { BiBookAdd, BiSearchAlt, BiTrash } from 'react-icons/bi'
 import { BsArrowBarRight } from 'react-icons/bs'
 import { RiCloseLine } from 'react-icons/ri'
 import Button from './Button'
 
 export default function UrlRedirects({ user }: { user: User }) {
+  const [search, setSearch] = useState('')
   const {
     data: redirects,
     fetching: loadingData,
     reexecute,
     error: fetchError,
-  } = useUserUrlRedirects(user)
+  } = useUserUrlRedirects(user, search)
   const [addingOne, setAddingOne] = useState(false)
   const [from, setFrom] = useState('')
   const [to, setTo] = useState('')
@@ -123,6 +124,18 @@ export default function UrlRedirects({ user }: { user: User }) {
         >
           Add one
         </Button>
+      )}
+      {(redirects.length > 0 || search) && (
+        <div className="flex items-center px-2 py-1 mt-5 border rounded-full">
+          <BiSearchAlt className="mr-2 text-accent" size="1.5rem" />
+          <input
+            type="text"
+            onChange={(e) => setSearch(e.target.value)}
+            value={search}
+            className="bg-transparent outline-none"
+            placeholder="Search"
+          />
+        </div>
       )}
       <div className="my-3 text-danger">{error}</div>
       {(loadingData || loadingDelete || loadingInsert) && (

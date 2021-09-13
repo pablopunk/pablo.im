@@ -5,7 +5,8 @@ import { useDelete, useFilter, useInsert, useSelect } from 'react-supabase'
 const TABLE_NAME = 'url_redirects'
 
 export const useUserUrlRedirects = (
-  user: User
+  user: User,
+  search?: string
 ): {
   count?: number
   error?: PostgrestError
@@ -13,7 +14,19 @@ export const useUserUrlRedirects = (
   fetching: boolean
   reexecute?(): void
 } => {
-  const filter = useFilter((query) => query.eq('user_id', user.id), [user.id])
+  const filter = useFilter(
+    (query) => {
+      if (!search) {
+        return query.eq('user_id', user.id)
+      }
+      return query
+        .eq('user_id', user.id)
+        .or(`from.like.%${search}%,to.like.%${search}%`)
+      // .like('from', `%${search}%`)
+      // .like('to', `%${search}%`)
+    },
+    [user.id, search]
+  )
   const [{ count, data, error, fetching }, reexecute] = useSelect<UrlRedirect>(
     TABLE_NAME,
     { filter }
