@@ -28,7 +28,7 @@ const Page: FunctionComponent<Props> = () => {
       )}
       <Button
         href="https://github.com/pablopunk/pablo.im"
-        icon={<ImGithub />}
+        Icon={ImGithub}
         title="Code on Github"
       ></Button>
       <Button href={toggleTheme} title="Toggle theme">

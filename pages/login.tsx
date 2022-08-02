@@ -29,9 +29,14 @@ export default function Login() {
     signIn({ email })
   }
 
+  const onProviderLogin = (provider) => {
+    signIn({ provider })
+  }
+
   return (
     <LoginForm
-      onFormSubmit={clickedLogin}
+      onEmailLogin={clickedLogin}
+      onProviderLogin={onProviderLogin}
       error={error}
       fetching={fetching}
       successful={successful}
