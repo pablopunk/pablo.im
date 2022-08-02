@@ -14,7 +14,7 @@ export const LoadingScreen = () => {
         </Button>
       </div>
       <div className="mt-2">
-        <img src={`/landing/${theme}.png`} alt="screenshot" />
+        {theme && <img src={`/landing/${theme}.png`} alt="screenshot" />}
       </div>
     </div>
   )

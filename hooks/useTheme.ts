@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 
-type Theme = 'dark' | 'light'
+type Theme = 'dark' | 'light' | null
 
 export default function useTheme(): [Theme, () => void] {
-  const [theme, setTheme] = useState<Theme>('light')
+  const [theme, setTheme] = useState<Theme>(null)
 
   useEffect(() => {
     updateState()
