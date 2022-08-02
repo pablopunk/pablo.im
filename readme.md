@@ -2,4 +2,5 @@
 
 > Custom URLs!
 
-![screenshot](https://github.com/pablopunk/art/blob/master/pablo.im/screenshot.png?raw=true)
+![screenshot](https://pablo.im/landing/light.png#gh-light-mode-only)
+![screenshot](https://pablo.im/landing/dark.png#gh-dark-mode-only)
