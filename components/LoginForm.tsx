@@ -1,7 +1,18 @@
 /* eslint-disable no-unused-vars */
 import Button from 'components/Button'
-import { useState } from 'react'
+import { Fragment, useState } from 'react'
 import { ImGoogle, ImGithub } from 'react-icons/im'
+
+const providers = [
+  {
+    provider: 'google',
+    Icon: ImGoogle,
+  },
+  {
+    provider: 'github',
+    Icon: ImGithub,
+  },
+]
 
 type Props = {
   onEmailLogin(email: string): void
@@ -50,21 +61,22 @@ export default function LoginForm({
           ) : successful ? (
             <div className="text-accent">Check your inbox!</div>
           ) : (
-            <div>We'll send you a magic link</div>
+            <div className="text-accent opacity-80">
+              We'll send you a magic link
+            </div>
           )}
         </div>
       )}
       <div className="border-t w-full pt-2 mt-2 flex items-center justify-center gap-2">
-        <Button
-          href={() => onProviderLogin('google')}
-          Icon={ImGoogle}
-          className="p-1"
-        ></Button>
-        <Button
-          href={() => onProviderLogin('github')}
-          Icon={ImGithub}
-          className="p-1"
-        ></Button>
+        {providers.map(({ provider, Icon }) => (
+          <Fragment key={provider}>
+            <Button
+              href={() => onProviderLogin(provider)}
+              Icon={Icon}
+              className="text-2xl"
+            />
+          </Fragment>
+        ))}
       </div>
     </div>
   )
