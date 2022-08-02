@@ -77,7 +77,7 @@ export default function UrlRedirects({ user }: { user: User }) {
           <Button
             className="absolute -top-5 -right-5"
             href={() => setAddingOne(false)}
-            icon={<RiCloseLine />}
+            Icon={RiCloseLine}
             type="danger"
             rounded
           />
@@ -117,7 +117,7 @@ export default function UrlRedirects({ user }: { user: User }) {
       ) : (
         <Button
           href={() => setAddingOne(true)}
-          icon={<BiBookAdd />}
+          Icon={BiBookAdd}
           type="action"
           className="mx-auto mt-4"
           rounded
@@ -169,7 +169,7 @@ export default function UrlRedirects({ user }: { user: User }) {
             {/*<Button href="" icon={<BiPencil />} rounded />*/}
             <Button
               href={() => handleDeleteUrlRedirect(redirect)}
-              icon={<BiTrash />}
+              Icon={BiTrash}
               type="danger"
               rounded
             />

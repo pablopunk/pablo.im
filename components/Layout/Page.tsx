@@ -6,7 +6,7 @@ type Props = {
   children: ReactNode | ReactNode[]
 }
 
-const Page = ({ children }) => (
+const Page = ({ children }: Props) => (
   <>
     <Header />
     <main className="max-w-[1300px] p-4 mx-auto h-fill flex items-center justify-center flex-col">
