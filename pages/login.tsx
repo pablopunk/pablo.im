@@ -34,12 +34,15 @@ export default function Login() {
   }
 
   return (
-    <LoginForm
-      onEmailLogin={clickedLogin}
-      onProviderLogin={onProviderLogin}
-      error={error}
-      fetching={fetching}
-      successful={successful}
-    />
+    <>
+      <h1 className="text-xl mb-1">Login or sign up</h1>
+      <LoginForm
+        onEmailLogin={clickedLogin}
+        onProviderLogin={onProviderLogin}
+        error={error}
+        fetching={fetching}
+        successful={successful}
+      />
+    </>
   )
 }
