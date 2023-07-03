@@ -1,9 +1,6 @@
-const colors = require('tailwindcss/colors')
-
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-  purge: ['./pages/**/*.tsx', './components/**/*.tsx'],
-  mode: 'jit',
-  darkMode: false, // or 'media' or 'class'
+  content: ['./pages/**/*.tsx', './components/**/*.tsx'],
   theme: {
     extend: {
       colors: {
@@ -15,7 +12,6 @@ module.exports = {
         border: 'var(--color-border)',
         danger: 'var(--color-danger)',
         transparent: 'transparent',
-        ...colors,
       },
       spacing: {
         header: 'var(--header-height)',
