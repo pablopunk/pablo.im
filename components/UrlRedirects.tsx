@@ -7,12 +7,16 @@ import {
 import { UrlRedirect, User } from 'db/types'
 import isUrl from 'is-url'
 import { isValidName } from 'lib/isValidName'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { AiOutlineLoading } from 'react-icons/ai'
 import { BiBookAdd, BiSearchAlt, BiTrash } from 'react-icons/bi'
 import { BsArrowBarRight } from 'react-icons/bs'
 import { RiCloseLine } from 'react-icons/ri'
 import Button from './Button'
+import { useFavicons } from 'hooks/useFavicons'
+import classNames from 'classnames'
+
+const FAVICON_SIZE = 24
 
 export default function UrlRedirects({ user }: { user: User }) {
   const [search, setSearch] = useState('')
@@ -32,6 +36,11 @@ export default function UrlRedirects({ user }: { user: User }) {
   } = useInsertUrlRedirect()
   const { deleteFn, fetching: loadingDelete } = useDeleteUrlRedirect()
   const [error, setError] = useState('')
+  const urlsToFetchFavicons = useMemo(
+    () => redirects.map((redirect) => redirect.to),
+    [redirects]
+  )
+  const favicons = useFavicons(urlsToFetchFavicons)
 
   useEffect(() => {
     if (fetchError) {
@@ -81,8 +90,8 @@ export default function UrlRedirects({ user }: { user: User }) {
             type="danger"
             rounded
           />
-          <div className="flex items-start w-full p-2 mb-2 border rounded">
-            <label className="mr-1 font-bold">From</label>
+          <div className="flex gap-1 items-start w-full p-2 mb-2 border rounded">
+            <label className="font-bold">From</label>
             <div className="flex font-mono">
               <span className="text-accent mr-[1px]">pablo.im/</span>
               <input
@@ -94,8 +103,8 @@ export default function UrlRedirects({ user }: { user: User }) {
               />
             </div>
           </div>
-          <div className="flex items-center w-full p-2 border rounded">
-            <label className="mr-2 font-bold">To</label>
+          <div className="flex items-center gap-1 w-full p-2 border rounded">
+            <label className="font-bold">To</label>
             <input
               type="url"
               value={to}
@@ -126,8 +135,8 @@ export default function UrlRedirects({ user }: { user: User }) {
         </Button>
       )}
       {(redirects.length > 0 || search) && (
-        <div className="flex items-center px-2 py-1 my-4 border rounded-full">
-          <BiSearchAlt className="mr-2 text-accent" size="1.5rem" />
+        <div className="flex gap-2 items-center px-2 py-1 my-4 border rounded-full">
+          <BiSearchAlt className="text-accent" size="1.5rem" />
           <input
             type="text"
             onChange={(e) => setSearch(e.target.value)}
@@ -146,11 +155,42 @@ export default function UrlRedirects({ user }: { user: User }) {
           key={redirect.id}
           className="flex items-center justify-between w-full py-1 pl-5 pr-2 my-2 border rounded-full shadow"
         >
-          <div className="flex items-center overflow-hidden">
+          <div className="flex items-center overflow-hidden gap-2">
+            <div
+              className={classNames(
+                'rounded-full flex items-center justify-center',
+                {}
+              )}
+            >
+              {!!favicons[redirect.to] || ( // loading state
+                <img
+                  width={FAVICON_SIZE / 2}
+                  height={FAVICON_SIZE / 2}
+                  src="/favicon.png"
+                  className="absolute animate-ping"
+                />
+              )}
+              <img
+                width={FAVICON_SIZE}
+                height={FAVICON_SIZE}
+                src={favicons[redirect.to]}
+                alt={redirect.from}
+                className={classNames(
+                  'rounded-full',
+                  `w-[${FAVICON_SIZE}] h-[${FAVICON_SIZE}]`
+                )}
+                onError={(e) => {
+                  e.currentTarget.src = '/favicon.png'
+                }}
+                style={{
+                  opacity: favicons[redirect.to] ? 1 : 0,
+                }}
+              />{' '}
+            </div>
             <div className="relative max-w-xs truncate">
               <a
                 href={SITE_URL + '/' + redirect.from}
-                className="mr-1 transition-all hover:underline text-accent"
+                className="transition-all hover:underline text-accent"
               >
                 /{redirect.from}
               </a>

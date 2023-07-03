@@ -15,6 +15,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@meltwater/fetch-favicon": "^1.0.4",
     "@supabase/postgrest-js": "^0.37.4",
     "@supabase/supabase-js": "^1.22.5",
     "autoprefixer": "^10.2.6",
