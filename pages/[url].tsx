@@ -1,6 +1,6 @@
-import { getUrlRedirect } from 'db'
-import { GetServerSidePropsContext } from 'next'
-import { useEffect } from 'react'
+import { getUrlRedirect } from "db"
+import type { GetServerSidePropsContext } from "next"
+import { useEffect } from "react"
 
 export default function Url({ to }) {
   useEffect(() => {
@@ -13,8 +13,6 @@ export default function Url({ to }) {
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const from = context.query.url as string
   const to = await getUrlRedirect(from)
-
-  console.log('hola')
 
   if (!to) {
     return {

@@ -1,25 +1,25 @@
-import { SITE_URL } from 'config'
+import classNames from "classnames"
+import { SITE_URL } from "config"
 import {
   useDeleteUrlRedirect,
   useInsertUrlRedirect,
   useUserUrlRedirects,
-} from 'db'
-import { UrlRedirect, User } from 'db/types'
-import isUrl from 'is-url'
-import { isValidName } from 'lib/isValidName'
-import React, { useEffect, useMemo, useState } from 'react'
-import { AiOutlineLoading } from 'react-icons/ai'
-import { BiBookAdd, BiSearchAlt, BiTrash } from 'react-icons/bi'
-import { BsArrowBarRight } from 'react-icons/bs'
-import { RiCloseLine } from 'react-icons/ri'
-import Button from './Button'
-import { useFavicons } from 'hooks/useFavicons'
-import classNames from 'classnames'
+} from "db"
+import type { UrlRedirect, User } from "db/types"
+import { useFavicons } from "hooks/useFavicons"
+import isUrl from "is-url"
+import { isValidName } from "lib/isValidName"
+import React, { useEffect, useMemo, useState } from "react"
+import { AiOutlineLoading } from "react-icons/ai"
+import { BiBookAdd, BiSearchAlt, BiTrash } from "react-icons/bi"
+import { BsArrowBarRight } from "react-icons/bs"
+import { RiCloseLine } from "react-icons/ri"
+import Button from "./Button"
 
 const FAVICON_SIZE = 24
 
 export default function UrlRedirects({ user }: { user: User }) {
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState("")
   const {
     data: redirects,
     fetching: loadingData,
@@ -27,18 +27,18 @@ export default function UrlRedirects({ user }: { user: User }) {
     error: fetchError,
   } = useUserUrlRedirects(user, search)
   const [addingOne, setAddingOne] = useState(false)
-  const [from, setFrom] = useState('')
-  const [to, setTo] = useState('')
+  const [from, setFrom] = useState("")
+  const [to, setTo] = useState("")
   const {
     insert,
     fetching: loadingInsert,
     error: insertError,
   } = useInsertUrlRedirect()
   const { deleteFn, fetching: loadingDelete } = useDeleteUrlRedirect()
-  const [error, setError] = useState('')
+  const [error, setError] = useState("")
   const urlsToFetchFavicons = useMemo(
     () => redirects.map((redirect) => redirect.to),
-    [redirects]
+    [redirects],
   )
   const favicons = useFavicons(urlsToFetchFavicons)
 
@@ -48,13 +48,13 @@ export default function UrlRedirects({ user }: { user: User }) {
     } else if (insertError) {
       setError(insertError.message)
     } else {
-      setError('')
+      setError("")
     }
   }, [fetchError, insertError])
 
   const handleSubmitNewUrlRedirect = () => {
     if (!from || !to) {
-      setError('From and To must be filled')
+      setError("From and To must be filled")
       return
     }
     if (!isUrl(to)) {
@@ -68,7 +68,7 @@ export default function UrlRedirects({ user }: { user: User }) {
     insert({ from, to, user_id: user.id })
       .then(reexecute)
       .then(() => error == null && setAddingOne(false))
-      .then(() => setTo(''))
+      .then(() => setTo(""))
       .catch((error) => setError(error.message))
   }
 
@@ -109,7 +109,7 @@ export default function UrlRedirects({ user }: { user: User }) {
               type="url"
               value={to}
               onChange={(e) => setTo(e.target.value)}
-              onKeyUp={(e) => e.key === 'Enter' && handleSubmitNewUrlRedirect()}
+              onKeyUp={(e) => e.key === "Enter" && handleSubmitNewUrlRedirect()}
               placeholder="https://long-url.com/whatever"
               className="w-full bg-transparent focus:outline-none "
             />
@@ -158,8 +158,8 @@ export default function UrlRedirects({ user }: { user: User }) {
           <div className="flex items-center overflow-hidden gap-2">
             <div
               className={classNames(
-                'rounded-full flex items-center justify-center',
-                {}
+                "rounded-full flex items-center justify-center",
+                {},
               )}
             >
               {!!favicons[redirect.to] || ( // loading state
@@ -167,6 +167,7 @@ export default function UrlRedirects({ user }: { user: User }) {
                   width={FAVICON_SIZE / 2}
                   height={FAVICON_SIZE / 2}
                   src="/favicon.png"
+                  alt="favicon"
                   className="absolute animate-ping"
                 />
               )}
@@ -176,20 +177,20 @@ export default function UrlRedirects({ user }: { user: User }) {
                 src={favicons[redirect.to]}
                 alt={redirect.from}
                 className={classNames(
-                  'rounded-full',
-                  `w-[${FAVICON_SIZE}] h-[${FAVICON_SIZE}]`
+                  "rounded-full",
+                  `w-[${FAVICON_SIZE}] h-[${FAVICON_SIZE}]`,
                 )}
                 onError={(e) => {
-                  e.currentTarget.src = '/favicon.png'
+                  e.currentTarget.src = "/favicon.png"
                 }}
                 style={{
                   opacity: favicons[redirect.to] ? 1 : 0,
                 }}
-              />{' '}
+              />{" "}
             </div>
             <div className="relative max-w-xs truncate">
               <a
-                href={SITE_URL + '/' + redirect.from}
+                href={`${SITE_URL}/${redirect.from}`}
                 className="transition-all hover:underline text-accent"
               >
                 /{redirect.from}

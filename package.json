@@ -7,9 +7,8 @@
     "dev": "next",
     "start": "next start",
     "build": "next build",
-    "lint": "eslint . --ext ts,tsx",
-    "lint:fix": "eslint . --ext ts,tsx --fix",
-    "generate-types": "openapi-typescript \"$(dotenv -- bash -c 'echo $NEXT_PUBLIC_SUPABASE_URL')/rest/v1/?apikey=$(dotenv -- bash -c 'echo $NEXT_PUBLIC_SUPABASE_ANON_KEY')\" --output db/supabase/generated-types.ts"
+    "generate-types": "openapi-typescript \"$(dotenv -- bash -c 'echo $NEXT_PUBLIC_SUPABASE_URL')/rest/v1/?apikey=$(dotenv -- bash -c 'echo $NEXT_PUBLIC_SUPABASE_ANON_KEY')\" --output db/supabase/generated-types.ts",
+    "format": "bunx biome check --write pages components styles db lib"
   },
   "keywords": [],
   "author": "",
@@ -33,54 +32,16 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged"
-    }
-  },
-  "prettier": {
-    "semi": false,
-    "singleQuote": true,
-    "tabWidth": 2
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "browser": true,
-      "es2021": true,
-      "node": true
-    },
-    "extends": [
-      "prettier"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-      "ecmaFeatures": {
-        "jsx": true
-      },
-      "ecmaVersion": 12,
-      "sourceType": "module"
-    },
-    "plugins": [
-      "react",
-      "@typescript-eslint"
-    ],
-    "rules": {
-      "no-unused-vars": "error"
+      "pre-commit": "bun run format"
     }
   },
   "devDependencies": {
+    "@biomejs/biome": "1.8.1",
     "@types/node": "^18.6.3",
     "@types/react": "18.0.1",
-    "@typescript-eslint/eslint-plugin": "^4.27.0",
-    "@typescript-eslint/parser": "^4.27.0",
     "dotenv-cli": "^4.0.0",
-    "eslint": "^7.28.0",
-    "eslint-config-next": "^11.0.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-react": "^7.24.0",
     "husky": "*",
     "openapi-typescript": "^4.0.2",
-    "prettier": "*",
-    "pretty-quick": "*",
     "typescript": "^4.3.4"
   }
 }

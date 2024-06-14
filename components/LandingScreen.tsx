@@ -1,6 +1,6 @@
-import Button from 'components/Button'
-import useTheme from 'hooks/useTheme'
-import { BsArrowRight } from 'react-icons/bs'
+import Button from "components/Button"
+import useTheme from "hooks/useTheme"
+import { BsArrowRight } from "react-icons/bs"
 
 export const LandingScreen = () => {
   const [theme] = useTheme()

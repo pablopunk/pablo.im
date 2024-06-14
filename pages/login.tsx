@@ -1,6 +1,6 @@
-import LoginForm from 'components/LoginForm'
-import { useSignIn } from 'db'
-import { useEffect, useState } from 'react'
+import LoginForm from "components/LoginForm"
+import { useSignIn } from "db"
+import { useEffect, useState } from "react"
 
 export default function Login() {
   const [{ error: signInError, fetching }, signIn] = useSignIn()
@@ -22,7 +22,7 @@ export default function Login() {
 
   const clickedLogin = (email) => {
     if (!email) {
-      setError('Type your email')
+      setError("Type your email")
       return
     }
     setClicked(true)

@@ -4,7 +4,7 @@
  */
 
 export interface paths {
-  '/': {
+  "/": {
     get: {
       responses: {
         /** OK */
@@ -12,38 +12,38 @@ export interface paths {
       }
     }
   }
-  '/url_redirects': {
+  "/url_redirects": {
     get: {
       parameters: {
         query: {
-          id?: parameters['rowFilter.url_redirects.id']
-          created_at?: parameters['rowFilter.url_redirects.created_at']
-          updated_at?: parameters['rowFilter.url_redirects.updated_at']
-          from?: parameters['rowFilter.url_redirects.from']
-          to?: parameters['rowFilter.url_redirects.to']
-          user_id?: parameters['rowFilter.url_redirects.user_id']
+          id?: parameters["rowFilter.url_redirects.id"]
+          created_at?: parameters["rowFilter.url_redirects.created_at"]
+          updated_at?: parameters["rowFilter.url_redirects.updated_at"]
+          from?: parameters["rowFilter.url_redirects.from"]
+          to?: parameters["rowFilter.url_redirects.to"]
+          user_id?: parameters["rowFilter.url_redirects.user_id"]
           /** Filtering Columns */
-          select?: parameters['select']
+          select?: parameters["select"]
           /** Ordering */
-          order?: parameters['order']
+          order?: parameters["order"]
           /** Limiting and Pagination */
-          offset?: parameters['offset']
+          offset?: parameters["offset"]
           /** Limiting and Pagination */
-          limit?: parameters['limit']
+          limit?: parameters["limit"]
         }
         header: {
           /** Limiting and Pagination */
-          Range?: parameters['range']
+          Range?: parameters["range"]
           /** Limiting and Pagination */
-          'Range-Unit'?: parameters['rangeUnit']
+          "Range-Unit"?: parameters["rangeUnit"]
           /** Preference */
-          Prefer?: parameters['preferCount']
+          Prefer?: parameters["preferCount"]
         }
       }
       responses: {
         /** OK */
         200: {
-          schema: definitions['url_redirects'][]
+          schema: definitions["url_redirects"][]
         }
         /** Partial Content */
         206: unknown
@@ -53,15 +53,15 @@ export interface paths {
       parameters: {
         body: {
           /** url_redirects */
-          url_redirects?: definitions['url_redirects']
+          url_redirects?: definitions["url_redirects"]
         }
         query: {
           /** Filtering Columns */
-          select?: parameters['select']
+          select?: parameters["select"]
         }
         header: {
           /** Preference */
-          Prefer?: parameters['preferReturn']
+          Prefer?: parameters["preferReturn"]
         }
       }
       responses: {
@@ -72,16 +72,16 @@ export interface paths {
     delete: {
       parameters: {
         query: {
-          id?: parameters['rowFilter.url_redirects.id']
-          created_at?: parameters['rowFilter.url_redirects.created_at']
-          updated_at?: parameters['rowFilter.url_redirects.updated_at']
-          from?: parameters['rowFilter.url_redirects.from']
-          to?: parameters['rowFilter.url_redirects.to']
-          user_id?: parameters['rowFilter.url_redirects.user_id']
+          id?: parameters["rowFilter.url_redirects.id"]
+          created_at?: parameters["rowFilter.url_redirects.created_at"]
+          updated_at?: parameters["rowFilter.url_redirects.updated_at"]
+          from?: parameters["rowFilter.url_redirects.from"]
+          to?: parameters["rowFilter.url_redirects.to"]
+          user_id?: parameters["rowFilter.url_redirects.user_id"]
         }
         header: {
           /** Preference */
-          Prefer?: parameters['preferReturn']
+          Prefer?: parameters["preferReturn"]
         }
       }
       responses: {
@@ -92,20 +92,20 @@ export interface paths {
     patch: {
       parameters: {
         query: {
-          id?: parameters['rowFilter.url_redirects.id']
-          created_at?: parameters['rowFilter.url_redirects.created_at']
-          updated_at?: parameters['rowFilter.url_redirects.updated_at']
-          from?: parameters['rowFilter.url_redirects.from']
-          to?: parameters['rowFilter.url_redirects.to']
-          user_id?: parameters['rowFilter.url_redirects.user_id']
+          id?: parameters["rowFilter.url_redirects.id"]
+          created_at?: parameters["rowFilter.url_redirects.created_at"]
+          updated_at?: parameters["rowFilter.url_redirects.updated_at"]
+          from?: parameters["rowFilter.url_redirects.from"]
+          to?: parameters["rowFilter.url_redirects.to"]
+          user_id?: parameters["rowFilter.url_redirects.user_id"]
         }
         body: {
           /** url_redirects */
-          url_redirects?: definitions['url_redirects']
+          url_redirects?: definitions["url_redirects"]
         }
         header: {
           /** Preference */
-          Prefer?: parameters['preferReturn']
+          Prefer?: parameters["preferReturn"]
         }
       }
       responses: {
@@ -133,11 +133,11 @@ export interface definitions {
 
 export interface parameters {
   /** Preference */
-  preferParams: 'params=single-object'
+  preferParams: "params=single-object"
   /** Preference */
-  preferReturn: 'return=representation' | 'return=minimal' | 'return=none'
+  preferReturn: "return=representation" | "return=minimal" | "return=none"
   /** Preference */
-  preferCount: 'count=none'
+  preferCount: "count=none"
   /** Filtering Columns */
   select: string
   /** On Conflict */
@@ -153,15 +153,15 @@ export interface parameters {
   /** Limiting and Pagination */
   limit: string
   /** url_redirects */
-  'body.url_redirects': definitions['url_redirects']
-  'rowFilter.url_redirects.id': string
-  'rowFilter.url_redirects.created_at': string
-  'rowFilter.url_redirects.updated_at': string
-  'rowFilter.url_redirects.from': string
-  'rowFilter.url_redirects.to': string
-  'rowFilter.url_redirects.user_id': string
+  "body.url_redirects": definitions["url_redirects"]
+  "rowFilter.url_redirects.id": string
+  "rowFilter.url_redirects.created_at": string
+  "rowFilter.url_redirects.updated_at": string
+  "rowFilter.url_redirects.from": string
+  "rowFilter.url_redirects.to": string
+  "rowFilter.url_redirects.user_id": string
 }
 
-export interface operations {}
+export type operations = {}
 
-export interface external {}
+export type external = {}

@@ -1,5 +1,5 @@
-import fetchFavicon from '@meltwater/fetch-favicon'
-import { NextApiRequest, NextApiResponse } from 'next'
+import fetchFavicon from "@meltwater/fetch-favicon"
+import type { NextApiRequest, NextApiResponse } from "next"
 
 const fetchFaviconSafely = async (url: string) => {
   const urlObject = new URL(url)
@@ -17,15 +17,15 @@ export type FaviconsApiResponse = Record<string, string>
 
 export default async function FaviconsApi(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   const { urls } = req.body as FaviconsApiBody
 
   const favicons = await Promise.all(urls.map(fetchFaviconSafely))
-  const urlFavicons: FaviconsApiResponse = urls.reduce(
-    (acc, url, index) => ({ ...acc, [url]: favicons[index] }),
-    {}
-  )
+  const urlFavicons: FaviconsApiResponse = urls.reduce((acc, url, index) => {
+    acc[url] = favicons[index]
+    return acc
+  }, {} as FaviconsApiResponse)
 
   try {
     return res.status(200).json(urlFavicons)
@@ -33,6 +33,6 @@ export default async function FaviconsApi(
     console.error(error)
     return res
       .status(500)
-      .json({ error: 'An error occurred while fetching favicons.' })
+      .json({ error: "An error occurred while fetching favicons." })
   }
 }

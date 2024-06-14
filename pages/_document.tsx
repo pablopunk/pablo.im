@@ -1,5 +1,5 @@
-import Document, { Main, NextScript, Html, Head } from 'next/document'
-import darkModeCode from 'dark-mode-code'
+import darkModeCode from "dark-mode-code"
+import Document, { Main, NextScript, Html, Head } from "next/document"
 
 const lwtScript = `
   (function (m, a, z, e) {

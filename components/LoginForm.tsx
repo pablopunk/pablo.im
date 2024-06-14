@@ -1,15 +1,15 @@
 /* eslint-disable no-unused-vars */
-import Button from 'components/Button'
-import { Fragment, useState } from 'react'
-import { ImGoogle, ImGithub } from 'react-icons/im'
+import Button from "components/Button"
+import { Fragment, useState } from "react"
+import { ImGithub, ImGoogle } from "react-icons/im"
 
 const providers = [
   {
-    provider: 'google',
+    provider: "google",
     Icon: ImGoogle,
   },
   {
-    provider: 'github',
+    provider: "github",
     Icon: ImGithub,
   },
 ]
@@ -29,10 +29,10 @@ export default function LoginForm({
   fetching,
   successful,
 }) {
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState("")
 
   const inputStyles =
-    'rounded my-2 px-2 py-1 border focus:outline-none bg-bgDim shadow-md'
+    "rounded my-2 px-2 py-1 border focus:outline-none bg-bgDim shadow-md"
 
   return (
     <div className="flex flex-col items-center justify-center">
@@ -50,7 +50,7 @@ export default function LoginForm({
             href={() => onEmailLogin(email)}
             disabled={fetching || successful}
           >
-            {fetching ? 'Loading...' : 'Log in'}
+            {fetching ? "Loading..." : "Log in"}
           </Button>
         )}
       </div>

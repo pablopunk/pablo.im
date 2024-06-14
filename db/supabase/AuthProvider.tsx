@@ -1,5 +1,5 @@
-import { createContext, useEffect, useState } from 'react'
-import { useAuthStateChange, useClient } from 'react-supabase'
+import { createContext, useEffect, useState } from "react"
+import { useAuthStateChange, useClient } from "react-supabase"
 
 const initialState = { session: null, user: null }
 export const AuthContext = createContext(initialState)

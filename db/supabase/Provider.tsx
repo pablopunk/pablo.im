@@ -1,5 +1,5 @@
-import client from './client'
-import { Provider } from 'react-supabase'
+import { Provider } from "react-supabase"
+import client from "./client"
 
 const SupabaseProvider = ({ children }) => (
   <Provider value={client}>{children}</Provider>

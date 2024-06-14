@@ -1,9 +1,9 @@
-import { FunctionComponent } from 'react'
-import useTheme from 'hooks/useTheme'
-import { RiMoonLine, RiSunLine } from 'react-icons/ri'
-import { ImGithub } from 'react-icons/im'
-import { useAuth, useSignOut } from 'db'
-import Button from 'components/Button'
+import Button from "components/Button"
+import { useAuth, useSignOut } from "db"
+import useTheme from "hooks/useTheme"
+import type { FunctionComponent } from "react"
+import { ImGithub } from "react-icons/im"
+import { RiMoonLine, RiSunLine } from "react-icons/ri"
 type Props = {}
 
 const Page: FunctionComponent<Props> = () => {
@@ -14,7 +14,7 @@ const Page: FunctionComponent<Props> = () => {
 
   const handleSignOut = async () => {
     await signOut()
-    window.location.href = '/'
+    window.location.href = "/"
   }
 
   return (
@@ -30,9 +30,9 @@ const Page: FunctionComponent<Props> = () => {
         href="https://github.com/pablopunk/pablo.im"
         Icon={ImGithub}
         title="Code on Github"
-      ></Button>
+      />
       <Button href={toggleTheme} title="Toggle theme">
-        {theme === 'dark' ? <RiMoonLine /> : <RiSunLine />}
+        {theme === "dark" ? <RiMoonLine /> : <RiSunLine />}
       </Button>
     </nav>
   )

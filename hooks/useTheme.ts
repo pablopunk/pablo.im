@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react"
 
-type Theme = 'dark' | 'light' | null
+type Theme = "dark" | "light" | null
 
 export default function useTheme(): [Theme, () => void] {
   const [theme, setTheme] = useState<Theme>(null)
@@ -10,23 +10,23 @@ export default function useTheme(): [Theme, () => void] {
   }, [])
 
   const updateState = () => {
-    const dark = document.body.classList.contains('dark')
-    setTheme(dark ? 'dark' : 'light')
+    const dark = document.body.classList.contains("dark")
+    setTheme(dark ? "dark" : "light")
   }
 
   const toggleTheme = () => {
-    window['__toggleDarkMode']?.()
+    window["__toggleDarkMode"]?.()
     updateState()
   }
 
-  if (typeof window !== 'undefined') {
-    const observer = new MutationObserver(function () {
+  if (typeof window !== "undefined") {
+    const observer = new MutationObserver(() => {
       updateState()
     })
 
     observer.observe(document.body, {
       attributes: true,
-      attributeFilter: ['class'],
+      attributeFilter: ["class"],
     })
   }
 

@@ -1,7 +1,7 @@
-import { LandingScreen } from 'components/LandingScreen'
-import UrlRedirects from 'components/UrlRedirects'
-import { useAuth } from 'db'
-import { FunctionComponent } from 'react'
+import { LandingScreen } from "components/LandingScreen"
+import UrlRedirects from "components/UrlRedirects"
+import { useAuth } from "db"
+import type { FunctionComponent } from "react"
 
 type Props = {}
 

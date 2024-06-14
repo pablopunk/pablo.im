@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react"
 
 export const useFavicons = (urls: string[]) => {
   const [favicons, setFavicons] = useState([])
@@ -6,14 +6,14 @@ export const useFavicons = (urls: string[]) => {
   useEffect(() => {
     const fetchFavicons = async () => {
       try {
-        const response = await fetch('/api/favicons', {
-          method: 'POST',
+        const response = await fetch("/api/favicons", {
+          method: "POST",
           body: JSON.stringify({ urls }),
-          headers: { 'Content-Type': 'application/json' },
+          headers: { "Content-Type": "application/json" },
         })
 
         if (response.ok) setFavicons(await response.json())
-        else throw new Error('An error occurred while fetching favicons.')
+        else throw new Error("An error occurred while fetching favicons.")
       } catch (error) {
         console.error(error)
       }

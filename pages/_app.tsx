@@ -1,13 +1,13 @@
-import React, { FunctionComponent } from 'react'
-import 'tailwindcss/tailwind.css'
-import 'styles/global.css'
-import { Page } from 'components/Layout'
-import { NextSeo } from 'next-seo'
-import { SITE_DESCRIPTION, SITE_NAME } from 'config'
-import Head from 'next/head'
-import { AuthProvider, DatabaseProvider } from 'db'
+import React, { type FunctionComponent } from "react"
+import "tailwindcss/tailwind.css"
+import "styles/global.css"
+import { Page } from "components/Layout"
+import { SITE_DESCRIPTION, SITE_NAME } from "config"
+import { AuthProvider, DatabaseProvider } from "db"
+import { NextSeo } from "next-seo"
+import Head from "next/head"
 
-const App: FunctionComponent<any> = ({ Component, pageProps }) => (
+const App: FunctionComponent<unknown> = ({ Component, pageProps }) => (
   <>
     <Head>
       <link rel="shortcut icon" href="/favicon.png" />
