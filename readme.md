@@ -2,7 +2,5 @@
 
 > Custom URLs!
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://pablo.im/landing/dark.png">
-  <img src="https://pablo.im/landing/light.png#gh-light-mode-only">
-</picture>
+![screenshot](https://pablo.im/landing/light.png#gh-light-mode-only)
+![screenshot](https://pablo.im/landing/dark.png#gh-dark-mode-only)
