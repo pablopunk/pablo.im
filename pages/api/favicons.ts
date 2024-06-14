@@ -28,6 +28,10 @@ export default async function FaviconsApi(
   }, {} as FaviconsApiResponse)
 
   try {
+    res.setHeader(
+      "Cache-Control",
+      "s-maxage=86400, stale-while-revalidate=3600",
+    )
     return res.status(200).json(urlFavicons)
   } catch (error) {
     console.error(error)
