@@ -1,0 +1,16 @@
+---
+import { getUrlRedirect } from '../db';
+
+const { slug } = Astro.params;
+
+// Fetch the redirect target
+const to = await getUrlRedirect(slug as string);
+
+if (!to) {
+  // Return 404 if no redirect found
+  return Astro.redirect('/404', 404);
+}
+
+// Perform 302 redirect
+return Astro.redirect(to, 302);
+---

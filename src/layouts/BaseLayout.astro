@@ -1,0 +1,70 @@
+---
+import '../styles/global.css';
+import { SITE_NAME, SITE_DESCRIPTION } from '../config';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description = SITE_DESCRIPTION } = Astro.props;
+const pageTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    
+    <!-- Dark mode script - runs before page render to avoid flash -->
+    <script is:inline>
+      // On page load, apply theme based on localStorage or system preference
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark')
+      } else {
+        document.documentElement.classList.remove('dark')
+      }
+
+      // Toggle function for manual switching
+      window.__toggleDarkMode = function() {
+        const isDark = document.documentElement.classList.contains('dark')
+        
+        if (isDark) {
+          // Currently dark, switch to light
+          document.documentElement.classList.remove('dark')
+          localStorage.theme = 'light'
+        } else {
+          // Currently light, switch to dark
+          document.documentElement.classList.add('dark')
+          localStorage.theme = 'dark'
+        }
+      }
+
+      // Listen for system preference changes (only if user hasn't set manual preference)
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        if (!('theme' in localStorage)) {
+          if (e.matches) {
+            document.documentElement.classList.add('dark')
+          } else {
+            document.documentElement.classList.remove('dark')
+          }
+        }
+      })
+    </script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

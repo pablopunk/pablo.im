@@ -1,0 +1,18 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import AppShell from '../components/AppShell';
+
+interface Props {
+  title?: string;
+  description?: string;
+  showFooter?: boolean;
+}
+
+const { title, description, showFooter = true } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <AppShell client:only="react" showFooter={showFooter}>
+    <slot />
+  </AppShell>
+</BaseLayout>

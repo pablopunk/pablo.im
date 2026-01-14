@@ -1,0 +1,17 @@
+---
+import Page from '../layouts/Page.astro';
+import { LandingScreen } from '../components/LandingScreen';
+import UrlRedirects from '../components/UrlRedirects';
+import { SITE_DESCRIPTION } from '../config';
+
+// Get user from middleware
+const { user } = Astro.locals;
+---
+
+<Page title="Home" description={SITE_DESCRIPTION}>
+  {user ? (
+    <UrlRedirects client:load user={user} />
+  ) : (
+    <LandingScreen client:load />
+  )}
+</Page>

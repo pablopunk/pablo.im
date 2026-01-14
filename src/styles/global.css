@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-bg: white;
+    --color-bgDim: rgb(250, 251, 252);
+    --color-fg: #454545;
+    --color-accent: #ad8b24;
+    --color-accent2: #b51bcd;
+    --color-border: rgb(232, 232, 232);
+    --color-danger: rgb(255, 83, 83);
+
+    --header-height: 60px;
+    --footer-height: 60px;
+
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+      Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    --font-serif: 'DM Serif Display', serif;
+  }
+
+  :root.dark {
+    --color-bg: #151515;
+    --color-bgDim: #2b2b2b;
+    --color-fg: #d1d1d1;
+    --color-accent: rgb(255, 243, 149);
+    --color-accent2: lightpink;
+    --color-border: #464646;
+  }
+
+  body {
+    color: var(--color-fg);
+    background-color: var(--color-bg);
+    font-family: var(--font-sans);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-serif);
+  }
+}
+
+@layer utilities {
+  .h-fill {
+    position: relative;
+    min-height: calc(100vh - var(--header-height) - var(--footer-height));
+  }
+}
