@@ -13,4 +13,9 @@ export default defineConfig({
       applyBaseStyles: false, // Keep existing global styles
     }),
   ],
+  vite: {
+    ssr: {
+      noExternal: ["react-icons"],
+    },
+  },
 })
